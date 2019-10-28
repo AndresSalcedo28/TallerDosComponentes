@@ -1,0 +1,17 @@
+<h3>{{displayQuery}}</h3>
+<input name="query" placeholder="Enter search" [(ngModel)]="searchQuery"/>
+<button (click) = "gitSearch()">Submit</button>
+<div *ngIf="searchResults && searchResults.total_count !== 0; else elseBlock">
+<h3 class = "total"> Total-Results : {{searchResults.total_count}}</h3>
+<ul class = "list">
+    <li [ngClass]="{true: 'modulo'}[i % 2 === 0]" class ="list_item" *ngFor="let result of searchResults.items; index as i">
+        <a [href] = "result.html_url">
+            <img class ="avatar" [src] ="result.avatar_url"/>
+            <h4 class= "title"> {{result.login}}
+            </h4>
+        </a>
+
+    </li>
+</ul>
+</div>
+<ng-template #elseBlock>No se encontraron parametros con la busqueda.</ng-template>
